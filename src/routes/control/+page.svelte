@@ -11,7 +11,7 @@
 </script>
 <body class="w-full bg-gray-600">
 
-<form class="my-5 w-1/2 text-xl mx-auto text-center bg-gray-300 rounded-lg py-4" id="myForm" method="POST" action="?/add">
+<form class="my-5 w-full lg:w-1/2 text-xl mx-auto text-center bg-gray-300 rounded-lg py-4" id="myForm" method="POST" action="?/add">
 	<h1 class="text-center text-4xl ">Aisha Donate API Editer</h1>
 	<p class="inline"> รับมา(เฉพาะยอดใหม่): <input class="w-auto inline p-1  text-sm text-gray-900 bg-gray-400 rounded-lg border border-gray-300" type="number" step="0.01" name="Recived" value="">บาท</p><br>
 	<p class="inline">ยอดทั้งหมด(ไม่ต้องแก้): <input class="w-auto w-fit p-1  text-sm text-gray-900 bg-gray-400 rounded-lg border border-gray-300" type="number" step="0.01" name="Needed" value=20000>บาท</p><br>
