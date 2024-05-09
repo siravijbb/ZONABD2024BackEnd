@@ -9,7 +9,7 @@ export const actions: Actions = {
 		const frontdata = await request.formData();
 		const Auth = frontdata.get("Auth") as string;
 		let Recived = frontdata.get('Recived') as unknown as number;
-		let Needed = frontdata.get('Needed') as unknown as number;
+		let Needed = frontdata.get('Needed') as unknown as number ?? 60000;
 		const AuthCode = await db.invitedUser.findFirst({
 			where: {
 				invitecode: Auth,
