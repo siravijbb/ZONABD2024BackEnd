@@ -3,18 +3,19 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model DonateData {
-  id           String   @id
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  ids          String
   TotalNeed    Float
   TotalDonated Float
-  UpdatedAt    DateTime @default(now())
 }
 
 model InvitedUser {
-  id         String @id
+  id         String @id @default(auto()) @map("_id") @db.ObjectId
+  ids        String
   invitecode String @unique
 }

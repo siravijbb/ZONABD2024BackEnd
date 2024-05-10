@@ -24,7 +24,7 @@ export const actions: Actions = {
 			if(!Needed){
 				const ReadDonateData = await db.donateData.findFirst({
 					where: {
-						id: "1",
+						ids: "1",
 					},
 					select: {
 						TotalNeed: true,
@@ -42,7 +42,7 @@ export const actions: Actions = {
 			Needed = parseFloat(String(Needed));
 			const ReadDonateData = await db.donateData.findFirst({
 				where: {
-					id: "1",
+					ids: "1",
 				}
 			})
 			if(!ReadDonateData || !Recived || !Needed){
@@ -55,7 +55,7 @@ export const actions: Actions = {
 			console.debug("C:" +CombinedDonate)
 			await db.donateData.update({
 				where: {
-					id: "1",
+					id: "663e81dc276ff01e6830e41c",
 				},
 				data: {
 					TotalNeed: Needed,
@@ -64,7 +64,7 @@ export const actions: Actions = {
 			});
 			const VerifyDonateData = await db.donateData.findFirst({
 				where: {
-					id: "1",
+					ids: "1",
 				},
 				select: {
 					TotalDonated: true,
