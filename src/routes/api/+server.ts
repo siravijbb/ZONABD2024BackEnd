@@ -19,7 +19,7 @@ export const GET = async (event) => {
 	if (await limiter.isLimited(event)) error(429);
 	const VerifyDonateData = await db.donateData.findFirst({
 		where: {
-			id: "1",
+			ids: "1",
 		},
 		select: {
 			TotalDonated: true,
