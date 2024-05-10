@@ -9,7 +9,7 @@ export const actions: Actions = {
 		const frontdata = await request.formData();
 		const Auth = frontdata.get("Auth") as string;
 		let Recived = frontdata.get('Recived') as unknown as number;
-		let Needed = frontdata.get('Needed') as unknown as number ?? 60000;
+		let Needed = frontdata.get('Needed') as unknown as number;
 		const AuthCode = await db.invitedUser.findFirst({
 			where: {
 				invitecode: Auth,
@@ -21,6 +21,23 @@ export const actions: Actions = {
 				auth: false
 			}}
 		else{
+			if(!Needed){
+				const ReadDonateData = await db.donateData.findFirst({
+					where: {
+						id: "1",
+					},
+					select: {
+						TotalNeed: true,
+					}
+				})
+				if(!ReadDonateData){
+					return {
+						auth: true,
+						server: false
+					}
+				}
+				Needed = ReadDonateData.TotalNeed;
+			}
 			Recived = parseFloat(String(Recived));
 			Needed = parseFloat(String(Needed));
 			const ReadDonateData = await db.donateData.findFirst({
