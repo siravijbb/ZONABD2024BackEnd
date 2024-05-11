@@ -77,7 +77,7 @@ export const actions: Actions = {
 					server: false
 				}
 			}
-			console.error(Recived)
+			console.debug(Recived)
 			return {
 				auth: true,
 				server: true,
