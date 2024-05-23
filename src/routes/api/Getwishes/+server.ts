@@ -27,6 +27,8 @@ export const GET = async (event) => {
 	// Get the current date and time in UTC
 	const currentDateTime = new Date();
 	const currentDateTimeUTC = new Date(currentDateTime.toISOString());
+	const offsetMilliseconds = 7 * 60 * 60 * 1000;
+
 
 	// Convert the predefined date and time to UTC
 	const predefinedDateTimeObject = new Date(predefinedDateTime + 'Z');
@@ -39,10 +41,10 @@ export const GET = async (event) => {
 	let FormCloseDate: string;
 	// Get the date part
 	const datePart = currentDateTime.toLocaleDateString();
-	const releaseDate = predefinedDateTimeObject.toLocaleDateString();
+	const releaseDate = new Date( predefinedDateTimeObject.getDate() + offsetMilliseconds).toLocaleDateString();
 // Get the time part
 	const timePart = currentDateTime.toLocaleTimeString();
-	const releaseTime = predefinedDateTimeObject.toLocaleTimeString();
+	const releaseTime = new Date( predefinedDateTimeObject.getDate() + offsetMilliseconds).toLocaleDateString();
 
 
 	try {
