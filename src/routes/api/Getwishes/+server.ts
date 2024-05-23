@@ -44,7 +44,7 @@ export const GET = async (event) => {
 	const releaseDate = new Date( predefinedDateTimeObject.getTime() + offsetMilliseconds)
 // Get the time part
 	const timePart = currentDateTime.toLocaleTimeString();
-	const releaseTime = new Date( predefinedDateTimeObject)
+	const releaseTime = new Date( predefinedDateTimeObject.getTime() + offsetMilliseconds)
 
 
 	try {
