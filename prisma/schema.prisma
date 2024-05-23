@@ -9,13 +9,26 @@ datasource db {
 
 model DonateData {
   id           String @id @default(auto()) @map("_id") @db.ObjectId
-  ids          String
-  TotalNeed    Float
   TotalDonated Float
+  TotalNeed    Float
+  ids          String
 }
 
 model InvitedUser {
   id         String @id @default(auto()) @map("_id") @db.ObjectId
   ids        String
-  invitecode String @unique
+  invitecode String
+}
+
+model Wishes {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  DMY     String
+  agreed  String
+  comment String
+  count   Int
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  giftId  Json?
+  name    String
+  picture String
+  time    String
 }
