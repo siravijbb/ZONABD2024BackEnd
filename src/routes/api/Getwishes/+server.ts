@@ -41,10 +41,10 @@ export const GET = async (event) => {
 	let FormCloseDate: string;
 	// Get the date part
 	const datePart = currentDateTime.toLocaleDateString();
-	const releaseDate = new Date( predefinedDateTimeObject.getDate() + offsetMilliseconds).toLocaleDateString();
+	const releaseDate = new Date( predefinedDateTimeObject.getTime() + offsetMilliseconds)
 // Get the time part
 	const timePart = currentDateTime.toLocaleTimeString();
-	const releaseTime = new Date( predefinedDateTimeObject.getDate() + offsetMilliseconds).toLocaleDateString();
+	const releaseTime = new Date( predefinedDateTimeObject)
 
 
 	try {
@@ -59,13 +59,23 @@ export const GET = async (event) => {
 				JSON.stringify({
 					message: 'Success',
 					body: {
-					accepting: FormAccepting,
-					readable: Readable,
-					count:  count,
-					openDate: releaseDate,
-					openTime: releaseTime,
-					formCloseDate: formCloseObject.toLocaleDateString(),
-					formCloseTime: formCloseObject.toLocaleTimeString()
+						accepting: FormAccepting,
+						readable: Readable,
+						count:  count,
+						openDate: releaseDate.toLocaleDateString('en-TH', {
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric',
+							weekday: 'long',
+						}),
+						openTime: releaseTime.toLocaleTimeString(),
+						formCloseDate: formCloseObject.toLocaleDateString('en-TH', {
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric',
+							weekday: 'long',
+						}),
+						formCloseTime: formCloseObject.toLocaleTimeString()
 			}
 		}))}
 			else if(currentDateTimeUTC.getTime() <= predefinedDateTimeObject.getTime() && currentDateTimeUTC.getTime() > formCloseObject.getTime()) {
@@ -85,9 +95,19 @@ export const GET = async (event) => {
 						accepting: FormAccepting,
 						readable: Readable,
 						count:  count,
-						openDate: releaseDate,
-						openTime: releaseTime,
-						formCloseDate: formCloseObject.toLocaleDateString(),
+						openDate: releaseDate.toLocaleDateString('en-TH', {
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric',
+							weekday: 'long',
+						}),
+						openTime: releaseTime.toLocaleTimeString(),
+						formCloseDate: formCloseObject.toLocaleDateString('en-TH', {
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric',
+							weekday: 'long',
+						}),
 						formCloseTime: formCloseObject.toLocaleTimeString()
 					}
 				}))
