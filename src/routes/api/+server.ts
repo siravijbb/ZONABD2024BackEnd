@@ -19,29 +19,33 @@ export const GET = async (event) => {
 	if (await limiter.isLimited(event)) error(429);
 	const VerifyDonateData = await db.donateData.findFirst({
 		where: {
-			ids: "1",
+			ids: '1'
 		},
 		select: {
 			TotalDonated: true,
-			TotalNeed: true,
-		},
-	})
-	if(!VerifyDonateData){
+			TotalNeed: true
+		}
+	});
+	if (!VerifyDonateData) {
 		return new Response(
 			JSON.stringify({
 				message: 'Success',
 				body: {
-					"message": `Server Broken`
-				},}),{ status: 200 });}
-
+					message: `Server Broken`
+				}
+			}),
+			{ status: 200 }
+		);
+	}
 
 	return new Response(
 		JSON.stringify({
 			message: 'Success',
 			body: {
-				"Donated": VerifyDonateData.TotalDonated,
-				"Needed": VerifyDonateData.TotalNeed
+				Donated: VerifyDonateData.TotalDonated,
+				Needed: VerifyDonateData.TotalNeed
 			}
 		}),
-		{ status: 200 });
+		{ status: 200 }
+	);
 };
