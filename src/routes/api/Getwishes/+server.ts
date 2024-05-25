@@ -2,7 +2,8 @@ import { db } from '$lib/db.server';
 import { RateLimiter } from 'sveltekit-rate-limiter/server';
 import { error } from '@sveltejs/kit';
 
-const predefinedDate = '2024-01-29';
+let OverideFormAccepting = false;
+
 
 const limiter = new RateLimiter({
 	IP: [30, 's'], // IP address limiter
@@ -21,15 +22,15 @@ export const GET = async (event) => {
 	if (await limiter.isLimited(event)) error(429);
 	// Predefined date and time in the format "YYYY-MM-DDTHH:mm:ss" in ISO time
 	// this code make faster by chatGPT, Sory im not good javascript dev
-	const predefinedDateTime = '2024-01-29T13:30:00';
-	const formClose = '2024-01-29T17:00:00';
+	const ReadableDateTime = '2024-07-29T00:30:00';
+	const formClose = '2024-07-29T17:00:00';
 	// Get the current date and time in UTC
 	const currentDateTime = new Date();
 	const currentDateTimeUTC = new Date(currentDateTime.toISOString());
 	const offsetMilliseconds = 7 * 60 * 60 * 1000;
 
 	// Convert the predefined date and time to UTC
-	const predefinedDateTimeObject = new Date(predefinedDateTime + 'Z');
+	const predefinedDateTimeObject = new Date(ReadableDateTime + 'Z');
 	const formCloseObject = new Date(formClose + 'Z');
 
 	console.log('NOW :', currentDateTime.getTime());
@@ -39,10 +40,10 @@ export const GET = async (event) => {
 	let FormCloseDate: string;
 	// Get the date part
 	const datePart = currentDateTime.toLocaleDateString();
-	const releaseDate = new Date(predefinedDateTimeObject.getTime() + offsetMilliseconds);
+	const releaseDate = new Date(predefinedDateTimeObject.toUTCString() + offsetMilliseconds);
 	// Get the time part
-	const timePart = currentDateTime.toLocaleTimeString();
-	const releaseTime = new Date(predefinedDateTimeObject.getTime() + offsetMilliseconds);
+	const timePart = currentDateTime.toLocaleTimeString('en-th',{ hourCycle: 'h23',});
+	const releaseTime = new Date(predefinedDateTimeObject.toUTCString() + offsetMilliseconds);
 
 	try {
 		if (
@@ -50,8 +51,10 @@ export const GET = async (event) => {
 			currentDateTimeUTC.getTime() <= formCloseObject.getTime()
 		) {
 			console.log('Today is before the predefined date, But will open for count');
-			let count = db.wishes.count();
-			console.log('Code Closed (return count)');
+			let count = await db.wishes.count({
+
+			});
+			console.log('Code Closed (x count)' , count);
 			FormAccepting = true;
 			Readable = false;
 
@@ -62,20 +65,20 @@ export const GET = async (event) => {
 						accepting: FormAccepting,
 						readable: Readable,
 						count: count,
-						openDate: releaseDate.toLocaleDateString('en-TH', {
+						openDate: releaseDate.toLocaleDateString('th-TH', {
 							year: 'numeric',
 							month: 'long',
 							day: 'numeric',
 							weekday: 'long'
 						}),
-						openTime: releaseTime.toLocaleTimeString(),
-						formCloseDate: formCloseObject.toLocaleDateString('en-TH', {
+						openTime: releaseTime.toLocaleTimeString('th-th',{ hourCycle: 'h23',}),
+						formCloseDate: formCloseObject.toLocaleDateString('th-TH', {
 							year: 'numeric',
 							month: 'long',
 							day: 'numeric',
 							weekday: 'long'
 						}),
-						formCloseTime: formCloseObject.toLocaleTimeString()
+						formCloseTime: formCloseObject.toLocaleTimeString('th-th',{ hourCycle: 'h23',})
 					}
 				})
 			);
@@ -83,8 +86,8 @@ export const GET = async (event) => {
 			currentDateTimeUTC.getTime() <= predefinedDateTimeObject.getTime() &&
 			currentDateTimeUTC.getTime() > formCloseObject.getTime()
 		) {
-			console.log('Today is before the predefined date, But will open for count');
-			let count = db.wishes.count();
+			console.log('Today is before the predefined date and closed form, But will open for count');
+			let count = await db.wishes.count();
 			FormAccepting = false;
 			Readable = false;
 
@@ -99,32 +102,56 @@ export const GET = async (event) => {
 						accepting: FormAccepting,
 						readable: Readable,
 						count: count,
-						openDate: releaseDate.toLocaleDateString('en-TH', {
+						openDate: releaseDate.toLocaleDateString('th-TH', {
 							year: 'numeric',
 							month: 'long',
 							day: 'numeric',
 							weekday: 'long'
 						}),
-						openTime: releaseTime.toLocaleTimeString(),
-						formCloseDate: formCloseObject.toLocaleDateString('en-TH', {
+						openTime: releaseTime.toLocaleTimeString('th-TH', {hour12: false}),
+						formCloseDate: formCloseObject.toLocaleDateString('th-TH', {
 							year: 'numeric',
 							month: 'long',
 							day: 'numeric',
 							weekday: 'long'
 						}),
-						formCloseTime: formCloseObject.toLocaleTimeString()
+						formCloseTime: formCloseObject.toLocaleTimeString('th-TH', {hour12: false})
 					}
 				})
 			);
 		} else if (currentDateTimeUTC.getTime() > predefinedDateTimeObject.getTime()) {
 			FormAccepting = false;
 			Readable = true;
+			let count = await db.wishes.count();
+
 			return new Response(
 				JSON.stringify({
 					message: 'Success',
 					body: {
 						accepting: FormAccepting,
 						readable: Readable,
+						count: count,
+						wish: await db.wishes.findMany({
+							orderBy: {
+								count: 'desc'
+							}
+						})
+					}
+				})
+			);
+		}
+		else if (currentDateTimeUTC.getTime() > predefinedDateTimeObject.getTime() && OverideFormAccepting == true) {
+			FormAccepting = true;
+			Readable = true;
+			let count = await db.wishes.count();
+
+			return new Response(
+				JSON.stringify({
+					message: 'Success',
+					body: {
+						accepting: FormAccepting,
+						readable: Readable,
+						count: count,
 						wish: await db.wishes.findMany({
 							orderBy: {
 								count: 'desc'
