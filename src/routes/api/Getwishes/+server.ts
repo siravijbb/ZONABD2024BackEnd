@@ -84,7 +84,7 @@ export const GET = async (event) => {
 			);
 		} else if (
 			currentDateTimeUTC.getTime() <= predefinedDateTimeObject.getTime() &&
-			currentDateTimeUTC.getTime() > formCloseObject.getTime()
+			currentDateTimeUTC.getTime() > formCloseObject.getTime() && !OverideFormAccepting
 		) {
 			console.log('Today is before the predefined date and closed form, But will open for count');
 			let count = await db.wishes.count();
