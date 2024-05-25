@@ -140,7 +140,7 @@ export const GET = async (event) => {
 				})
 			);
 		}
-		else if (currentDateTimeUTC.getTime() > predefinedDateTimeObject.getTime() && OverideFormAccepting == true) {
+		else if (currentDateTimeUTC.getTime() > predefinedDateTimeObject.getTime() || OverideFormAccepting == true) {
 			FormAccepting = true;
 			Readable = true;
 			let count = await db.wishes.count();
