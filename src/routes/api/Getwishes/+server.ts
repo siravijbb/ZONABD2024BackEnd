@@ -2,7 +2,7 @@ import { db } from '$lib/db.server';
 import { RateLimiter } from 'sveltekit-rate-limiter/server';
 import { error } from '@sveltejs/kit';
 
-let OverideFormAccepting = false;
+let OverideFormAccepting = true;
 
 
 const limiter = new RateLimiter({
@@ -22,8 +22,8 @@ export const GET = async (event) => {
 	if (await limiter.isLimited(event)) error(429);
 	// Predefined date and time in the format "YYYY-MM-DDTHH:mm:ss" in ISO time
 	// this code make faster by chatGPT, Sory im not good javascript dev
-	const ReadableDateTime = '2024-07-29T00:30:00';
-	const formClose = '2024-07-29T17:00:00';
+	const ReadableDateTime = '2024-01-29T00:30:00';
+	const formClose = '2024-01-29T17:00:00';
 	// Get the current date and time in UTC
 	const currentDateTime = new Date();
 	const currentDateTimeUTC = new Date(currentDateTime.toISOString());
