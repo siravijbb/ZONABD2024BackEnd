@@ -73,10 +73,12 @@ export const GET = async (event) => {
 		} else if (DBOveridecheck.status == true) {
 			OverideFormAccepting = true;
 		}
+		// @ts-ignore
+		console.log("STATUS",DBOveridecheck.status)
 
 		if (
 			currentDateTimeUTC.getTime() <= predefinedDateTimeObject.getTime() &&
-			currentDateTimeUTC.getTime() <= formCloseObject.getTime()
+			currentDateTimeUTC.getTime() <= formCloseObject.getTime() && !OverideFormAccepting
 		) {
 			console.log('Today is before the predefined date, But will open for count');
 			let count = await db.wishes.count({});
@@ -170,8 +172,7 @@ export const GET = async (event) => {
 				})
 			);
 		} else if (
-			currentDateTimeUTC.getTime() > predefinedDateTimeObject.getTime() &&
-			OverideFormAccepting == true
+			OverideFormAccepting
 		) {
 			FormAccepting = true;
 			Readable = true;
