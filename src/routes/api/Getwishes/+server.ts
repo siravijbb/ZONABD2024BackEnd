@@ -68,13 +68,11 @@ export const GET = async (event) => {
 				status: true
 			}
 		});
-		if (!DBOveridecheck) {
+		if (!DBOveridecheck?.status) {
 			OverideFormAccepting = false;
 		} else if (DBOveridecheck.status == true) {
 			OverideFormAccepting = true;
 		}
-		// @ts-ignore
-		console.log("STATUS",DBOveridecheck.status)
 
 		if (
 			currentDateTimeUTC.getTime() <= predefinedDateTimeObject.getTime() &&
