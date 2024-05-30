@@ -89,7 +89,7 @@ export const GET = async (event) => {
 					message: 'Success',
 					body: {
 						accepting: FormAccepting,
-						readable: Readable,
+						canreadnow: Readable,
 						count: count,
 						openDate: releaseDate.toLocaleDateString('th-TH', {
 							year: 'numeric',
@@ -127,7 +127,7 @@ export const GET = async (event) => {
 					message: 'Success',
 					body: {
 						accepting: FormAccepting,
-						readable: Readable,
+						canreadnow: Readable,
 						count: count,
 						openDate: releaseDate.toLocaleDateString('th-TH', {
 							year: 'numeric',
@@ -159,7 +159,7 @@ export const GET = async (event) => {
 					message: 'Success',
 					body: {
 						accepting: FormAccepting,
-						readable: Readable,
+						canreadnow: Readable,
 						count: count,
 						wish: await db.wishes.findMany({
 							orderBy: {
@@ -181,7 +181,7 @@ export const GET = async (event) => {
 					message: 'Success',
 					body: {
 						accepting: FormAccepting,
-						readable: Readable,
+						canreadnow: Readable,
 						count: count,
 						wish: await db.wishes.findMany({
 							orderBy: {
