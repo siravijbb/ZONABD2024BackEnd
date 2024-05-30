@@ -14,21 +14,34 @@ model DonateData {
   ids          String
 }
 
+model FormConfig {
+  id               String @id @default(auto()) @map("_id") @db.ObjectId
+  ReadableDateTime String
+  formClose        String
+}
+
 model InvitedUser {
   id         String @id @default(auto()) @map("_id") @db.ObjectId
   ids        String
   invitecode String
 }
 
+model OverrideAccept {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  status Boolean
+}
+
 model Wishes {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  DMY     String
-  agreed  String
-  comment String
-  count   Int
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  DMY      String
+  agreed   String
+  approved Boolean?
+  comment  String
+  count    Int
   /// Could not determine type: the field only had null or empty values in the sample set.
-  giftId  Json?
-  name    String
-  picture String
-  time    String
+  giftId   Json?
+  name     String
+  picture  String
+  stattime String?
+  time     String
 }
