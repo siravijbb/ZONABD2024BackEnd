@@ -54,11 +54,13 @@ export const GET = async (event) => {
 	let FormCloseDate: string;
 	// Get the date part
 	const datePart = currentDateTime.toLocaleDateString();
-	const releaseDate = new Date(predefinedDateTimeObject.toUTCString() + offsetMilliseconds);
+	let releaseDate = new Date(predefinedDateTimeObject.toUTCString() + offsetMilliseconds);
+	releaseDate.setUTCHours(releaseDate.getUTCHours() + 7);
+
 	// Get the time part
 	const timePart = currentDateTime.toLocaleTimeString('en-th', { hourCycle: 'h23' });
-	const releaseTime = new Date(predefinedDateTimeObject.toUTCString() + offsetMilliseconds);
-
+	let releaseTime = new Date(predefinedDateTimeObject.toUTCString() + offsetMilliseconds);
+	releaseTime.setUTCHours(releaseTime.getUTCHours() + 7);
 	try {
 		let DBOveridecheck = await db.overrideAccept.findFirst({
 			where: {
