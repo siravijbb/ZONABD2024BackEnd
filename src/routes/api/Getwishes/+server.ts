@@ -40,7 +40,8 @@ export const GET = async (event) => {
 
 	// Get the current date and time in UTC
 	const currentDateTime = new Date();
-	const currentDateTimeUTC = new Date(currentDateTime.toISOString());
+	let currentDateTimeUTC = new Date(currentDateTime.toISOString());
+	currentDateTimeUTC.setUTCHours(currentDateTimeUTC.getUTCHours() + 7);
 	const offsetMilliseconds = 7 * 60 * 60 * 1000;
 
 	// Convert the predefined date and time to UTC
