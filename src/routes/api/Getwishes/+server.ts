@@ -188,7 +188,7 @@ export const GET = async (event) => {
 						count: count,
 						wish: await db.wishes.findMany({
 							orderBy: {
-								count: 'desc'
+								count: 'asc'
 							}
 						})
 					}
