@@ -37,6 +37,7 @@ model Wishes {
   agreed        String
   approved      Boolean
   comment       String
+  /// Multiple data types found: String: 88.9%, Int: 11.1% out of 18 sampled entries
   count         String
   lowercasename String
   name          String
