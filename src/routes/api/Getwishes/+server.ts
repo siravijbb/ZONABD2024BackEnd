@@ -55,12 +55,10 @@ export const GET = async (event) => {
 	// Get the date part
 	const datePart = currentDateTime.toLocaleDateString();
 	let releaseDate = new Date(predefinedDateTimeObject.toUTCString());
-	releaseDate.setUTCHours(releaseDate.getUTCHours() + 7);
 
 	// Get the time part
 	const timePart = currentDateTime.toLocaleTimeString('en-th', { hourCycle: 'h23' });
 	let releaseTime = new Date(predefinedDateTimeObject.toUTCString() );
-	releaseTime.setUTCHours(releaseTime.getUTCHours() + 7);
 	try {
 		let DBOveridecheck = await db.overrideAccept.findFirst({
 			where: {
