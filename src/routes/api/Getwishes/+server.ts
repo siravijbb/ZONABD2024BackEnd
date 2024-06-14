@@ -91,20 +91,20 @@ export const GET = async (event) => {
 						accepting: FormAccepting,
 						canreadnow: Readable,
 						count: count,
-						openDate: releaseDate.toLocaleDateString('th-TH', {
+						openDate: releaseDate.toLocaleDateString('en-th', {
 							year: 'numeric',
 							month: 'long',
 							day: 'numeric',
 							weekday: 'long'
 						}),
-						openTime: releaseTime.toLocaleTimeString('th-th', { hourCycle: 'h23' }),
-						formCloseDate: formCloseObject.toLocaleDateString('th-TH', {
+						openTime: releaseTime.toLocaleTimeString('en-th', { hourCycle: 'h23' }),
+						formCloseDate: formCloseObject.toLocaleDateString('en-th', {
 							year: 'numeric',
 							month: 'long',
 							day: 'numeric',
 							weekday: 'long'
 						}),
-						formCloseTime: formCloseObject.toLocaleTimeString('th-th', { hourCycle: 'h23' })
+						formCloseTime: formCloseObject.toLocaleTimeString('en-th', { hourCycle: 'h23' })
 					}
 				})
 			);
@@ -129,20 +129,20 @@ export const GET = async (event) => {
 						accepting: FormAccepting,
 						canreadnow: Readable,
 						count: count,
-						openDate: releaseDate.toLocaleDateString('th-TH', {
+						openDate: releaseDate.toLocaleDateString('en-th', {
 							year: 'numeric',
 							month: 'long',
 							day: 'numeric',
 							weekday: 'long'
 						}),
-						openTime: releaseTime.toLocaleTimeString('th-TH', { hour12: false }),
-						formCloseDate: formCloseObject.toLocaleDateString('th-TH', {
+						openTime: releaseTime.toLocaleTimeString('en-th', { hour12: false }),
+						formCloseDate: formCloseObject.toLocaleDateString('en-th', {
 							year: 'numeric',
 							month: 'long',
 							day: 'numeric',
 							weekday: 'long'
 						}),
-						formCloseTime: formCloseObject.toLocaleTimeString('th-TH', { hour12: false })
+						formCloseTime: formCloseObject.toLocaleTimeString('en-th', { hour12: false })
 					}
 				})
 			);
