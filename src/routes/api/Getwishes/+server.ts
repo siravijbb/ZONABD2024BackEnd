@@ -42,7 +42,6 @@ export const GET = async (event) => {
 	const currentDateTime = new Date();
 	let currentDateTimeUTC = new Date(currentDateTime.toISOString());
 	currentDateTimeUTC.setUTCHours(currentDateTimeUTC.getUTCHours() + 7);
-	const offsetMilliseconds = 7 * 60 * 60 * 1000;
 
 	// Convert the predefined date and time to UTC
 	const predefinedDateTimeObject = new Date(ReadableDateTime + 'Z');
@@ -55,12 +54,12 @@ export const GET = async (event) => {
 	let FormCloseDate: string;
 	// Get the date part
 	const datePart = currentDateTime.toLocaleDateString();
-	let releaseDate = new Date(predefinedDateTimeObject.toUTCString() + offsetMilliseconds);
+	let releaseDate = new Date(predefinedDateTimeObject.toUTCString());
 	releaseDate.setUTCHours(releaseDate.getUTCHours() + 7);
 
 	// Get the time part
 	const timePart = currentDateTime.toLocaleTimeString('en-th', { hourCycle: 'h23' });
-	let releaseTime = new Date(predefinedDateTimeObject.toUTCString() + offsetMilliseconds);
+	let releaseTime = new Date(predefinedDateTimeObject.toUTCString() );
 	releaseTime.setUTCHours(releaseTime.getUTCHours() + 7);
 	try {
 		let DBOveridecheck = await db.overrideAccept.findFirst({
