@@ -37,10 +37,8 @@ model Wishes {
   agreed        String
   approved      Boolean
   comment       String
-  count         Int
-  /// Could not determine type: the field only had null or empty values in the sample set.
-  giftId        Json?
-  lowercasename String?
+  count         String
+  lowercasename String
   name          String
   picture       String
   sidepicture   String
