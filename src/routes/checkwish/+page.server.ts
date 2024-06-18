@@ -47,7 +47,7 @@ export const actions: Actions = {
 		if(!id){
 		return	{updaterror: true}
 		}
-
+		try{
 		const update = await db.wishes.update(
 			{
 				where: { id: id, },
@@ -66,12 +66,28 @@ export const actions: Actions = {
 				id: true,
 				name: true,
 				comment: true,
-			}});
+			}})
 
 		return {
 			authUP: true,
 			serverUP: true,
 			wish: returnwishdata
+		}}catch (err){
+
+			const returnwishdata = await db.wishes.findMany({
+				orderBy: {
+					count: 'asc'
+				},
+				select: {
+					count: false,
+					id: true,
+					name: true,
+					comment: true,
+				}})
+
+
+
+			return	{updaterror: true,wish: returnwishdata}
 		}
 
 	},
@@ -83,32 +99,48 @@ export const actions: Actions = {
 			return	{updaterror: true}
 		}
 
-		const update = await db.wishes.update(
-			{
-				where: { id: id, },
-				data: {
-					approved: false
+		try{
+			const update = await db.wishes.update(
+				{
+					where: { id: id, },
+					data: {
+						approved: false
+					}
 				}
-			}
 
-		)
-		const returnwishdata = await db.wishes.findMany({
-			orderBy: {
-				count: 'asc'
-			},
-			select: {
-				count: false,
-				id: true,
-				name: true,
-				comment: true,
-			}});
+			)
+			const returnwishdata = await db.wishes.findMany({
+				orderBy: {
+					count: 'asc'
+				},
+				select: {
+					count: false,
+					id: true,
+					name: true,
+					comment: true,
+				}})
 
-		return {
-			authUP: true,
-			serverUP: true,
-			wish: returnwishdata
+			return {
+				authUP: true,
+				serverUP: true,
+				wish: returnwishdata
+			}}catch (err){
+
+			const returnwishdata = await db.wishes.findMany({
+				orderBy: {
+					count: 'asc'
+				},
+				select: {
+					count: false,
+					id: true,
+					name: true,
+					comment: true,
+				}})
+
+
+
+			return	{updaterror: true,wish: returnwishdata}
 		}
-
 	}
 
 	}
