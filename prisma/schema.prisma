@@ -7,13 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model DonateData {
-  id           String @id @default(auto()) @map("_id") @db.ObjectId
-  TotalDonated Float
-  TotalNeed    Float
-  ids          String
-}
-
 model FormConfig {
   id               String @id @default(auto()) @map("_id") @db.ObjectId
   ReadableDateTime String
@@ -21,9 +14,7 @@ model FormConfig {
 }
 
 model InvitedUser {
-  id         String @id @default(auto()) @map("_id") @db.ObjectId
-  ids        String
-  invitecode String
+  id String @id @default(auto()) @map("_id") @db.ObjectId
 }
 
 model OverrideAccept {
@@ -33,11 +24,13 @@ model OverrideAccept {
 
 model Wishes {
   id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  Bpicture      String
   DMY           String
   agreed        String
   approved      Boolean
   comment       String
   count         Int
+  giftId        String?
   lowercasename String
   name          String
   picture       String
