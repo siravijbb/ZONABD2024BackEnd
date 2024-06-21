@@ -24,7 +24,7 @@ model OverrideAccept {
 
 model Wishes {
   id            String  @id @default(auto()) @map("_id") @db.ObjectId
-  Bpicture      String
+  Bsidepicture      String
   DMY           String
   agreed        String
   approved      Boolean
