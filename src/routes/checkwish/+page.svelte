@@ -7,7 +7,10 @@
 <svelte:head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="robots" content="noindex">
+
 	<script src="https://cdn.tailwindcss.com"></script>
+
 </svelte:head>
 <body class="w-full bg-gray-600">
 <div class="bg-gray-300 w-full lg:w-1/2 mx-auto rounded-lg">
