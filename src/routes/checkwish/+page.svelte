@@ -20,7 +20,7 @@
 		method="POST"
 		action="?/check"
 	>
-		<h1 class="text-center text-4xl">Aisha WISH API Approval</h1>
+		<h1 class="text-center text-4xl">ZONA WISH API Approval</h1>
 		<br />
 		Authentication Code:
 		<input
