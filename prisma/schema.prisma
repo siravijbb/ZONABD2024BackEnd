@@ -14,7 +14,9 @@ model FormConfig {
 }
 
 model InvitedUser {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+  id         String @id @default(auto()) @map("_id") @db.ObjectId
+  ids        String
+  invitecode String
 }
 
 model OverrideAccept {
@@ -24,13 +26,12 @@ model OverrideAccept {
 
 model Wishes {
   id            String  @id @default(auto()) @map("_id") @db.ObjectId
-  Bsidepicture      String
+  Bsidepicture  String
   DMY           String
   agreed        String
   approved      Boolean
   comment       String
   count         Int
-  giftId        String?
   lowercasename String
   name          String
   picture       String
