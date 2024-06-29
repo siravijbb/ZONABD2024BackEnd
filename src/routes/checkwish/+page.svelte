@@ -1,7 +1,15 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
+	let thisForm: HTMLFormElement;
+	let loading = false;
 
 	export let form: ActionData;
+	function handleSubmit() {
+		loading = true;
+		setTimeout(() => {
+			loading = false;
+		}, 5000);
+	}
 </script>
 
 <svelte:head>
@@ -57,17 +65,20 @@
 		<div class="grid grid-cols-2">
 
 		{#each form?.wish as rom}
-			<form 		class="my-5  text-xl  text-center  rounded-lg mx-4 bg-white"
+			<form
+				bind:this={thisForm}
+				on:submit={handleSubmit}
+				class="my-5  text-xl  text-center  rounded-lg mx-4 bg-white"
 							 id="myForm2"
 							 method="POST"
-							 action="?/approve"
+
 								>
 			<p>ID:<input class="p-2 rounded-lg text-sm bg-gray-500 "   type="text" id="id" name="id" value={rom.id}></p>
 			<p>NAME: {rom.name}</p>
 			<p class="text-sm">WISH: {rom.comment}</p>
 
-				<button class="bg-green-500 rounded-lg mt-2 p-2 hover:bg-green-500/70" formaction="?/approve">Approve</button>
-				<button class="bg-green-500 rounded-lg mt-2 p-2 hover:bg-green-500/70" formaction="?/notapp">SPAM</button>
+				<button class="bg-green-500 rounded-lg mt-2 p-2 hover:bg-green-500/70 disabled:bg-green-500/30" 									disabled={loading} formaction="?/approve">Approve</button>
+				<button class="bg-red-500 rounded-lg mt-2 p-2 hover:bg-red-500/70 disabled:bg-red-500/30" 									disabled={loading} formaction="?/notapp">SPAM</button>
 
 			</form>
 			{/each}
