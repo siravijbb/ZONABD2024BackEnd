@@ -162,6 +162,9 @@ export const GET = async (event) => {
 						canreadnow: Readable,
 						count: count,
 						wish: await db.wishes.findMany({
+							where: {
+								approved: true,
+							},
 							orderBy: {
 								count: 'asc'
 							}
@@ -184,6 +187,9 @@ export const GET = async (event) => {
 						canreadnow: Readable,
 						count: count,
 						wish: await db.wishes.findMany({
+							where: {
+								approved: true,
+							},
 							orderBy: {
 								count: 'asc'
 							}
