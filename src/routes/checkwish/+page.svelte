@@ -74,7 +74,8 @@
 
 								>
 			<p>ID:<input class="p-2 rounded-lg text-sm bg-gray-500 "   type="text" id="id" name="id" value={rom.id}></p>
-			<p>NAME: {rom.name}</p>
+			<p>APPROVED: {rom.approved}</p>
+				<p>NAME: {rom.name}</p>
 			<p class="text-sm">WISH: {rom.comment}</p>
 
 				<button class="bg-green-500 rounded-lg mt-2 p-2 hover:bg-green-500/70 disabled:bg-green-500/30" 									disabled={loading} formaction="?/approve">Approve</button>
